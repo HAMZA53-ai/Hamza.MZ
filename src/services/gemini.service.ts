@@ -25,7 +25,7 @@ export class GeminiService {
     this.chat = this.ai.chats.create({
       model: 'gemini-2.5-flash',
       config: {
-        systemInstruction: 'You are a helpful and creative assistant named MZ. Provide clear, concise, and friendly responses.',
+        systemInstruction: 'أنت مساعد إبداعي ومفيد اسمك MZ. قدم إجابات واضحة وموجزة وودية.',
       },
     });
   }
@@ -38,7 +38,7 @@ export class GeminiService {
       }
     } catch (error) {
       console.error('Error in sendMessageStream:', error);
-      yield 'An error occurred while communicating with the AI. Please try again.';
+      yield 'حدث خطأ أثناء الاتصال بالذكاء الاصطناعي. يرجى المحاولة مرة أخرى.';
     }
   }
 }

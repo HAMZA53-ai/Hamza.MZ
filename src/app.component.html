@@ -6,7 +6,7 @@
     <!-- Header -->
     <header class="flex justify-between items-center p-4 border-b border-gray-800/50 absolute top-0 left-0 right-0 bg-[#0D0B14]/50 backdrop-blur-sm z-10">
       <div class="flex items-center space-x-3">
-        <h1 class="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">MZ Code</h1>
+        <h1 class="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">شات MZ</h1>
       </div>
       <button class="p-2 rounded-md hover:bg-gray-800/50 lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,25 +26,25 @@
               <div class="w-8 h-10 bg-purple-500 rounded-lg self-end transform -translate-y-2"></div>
             </div>
           </div>
-          <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text mb-2">Welcome to MZ</h2>
-          <p class="text-gray-400 max-w-md">You can ask me anything or attach a photo to get started.</p>
+          <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text mb-2">مرحباً بك في MZ</h2>
+          <p class="text-gray-400 max-w-md">يمكنك أن تسألني أي شيء أو ترفق صورة للبدء.</p>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-10 w-full max-w-3xl">
-            <button (click)="selectSuggestion('Explain the concept of black holes in simple terms')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-left hover:bg-gray-800/70 transition-colors duration-200">
-              <p class="font-semibold text-gray-200">Explain black holes</p>
-              <p class="text-sm text-gray-500">in simple terms</p>
+            <button (click)="selectSuggestion('اشرح لي مفهوم الثقوب السوداء بطريقة مبسطة')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-right hover:bg-gray-800/70 transition-colors duration-200">
+              <p class="font-semibold text-gray-200">اشرح مفهوم الثقوب السوداء</p>
+              <p class="text-sm text-gray-500">بطريقة مبسطة</p>
             </button>
-            <button (click)="selectSuggestion('What is the best way to learn web programming?')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-left hover:bg-gray-800/70 transition-colors duration-200">
-              <p class="font-semibold text-gray-200">Learn web programming</p>
-              <p class="text-sm text-gray-500">best way to start</p>
+            <button (click)="selectSuggestion('ما هي أفضل طريقة لتعلم برمجة الويب؟')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-right hover:bg-gray-800/70 transition-colors duration-200">
+              <p class="font-semibold text-gray-200">تعلم برمجة الويب</p>
+              <p class="text-sm text-gray-500">أفضل طريقة للبدء</p>
             </button>
-            <button (click)="selectSuggestion('Write a short story about a robot that discovers emotions')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-left hover:bg-gray-800/70 transition-colors duration-200">
-              <p class="font-semibold text-gray-200">A story about a robot</p>
-              <p class="text-sm text-gray-500">discovering emotions</p>
+            <button (click)="selectSuggestion('اكتب لي قصة قصيرة عن روبوت يكتشف المشاعر')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-right hover:bg-gray-800/70 transition-colors duration-200">
+              <p class="font-semibold text-gray-200">قصة عن روبوت</p>
+              <p class="text-sm text-gray-500">يكتشف المشاعر</p>
             </button>
-            <button (click)="selectSuggestion('What is the capital of Australia?')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-left hover:bg-gray-800/70 transition-colors duration-200">
-              <p class="font-semibold text-gray-200">Capital of Australia?</p>
-              <p class="text-sm text-gray-500">a quick fact</p>
+            <button (click)="selectSuggestion('ما هي عاصمة أستراليا؟')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-right hover:bg-gray-800/70 transition-colors duration-200">
+              <p class="font-semibold text-gray-200">ما هي عاصمة أستراليا؟</p>
+              <p class="text-sm text-gray-500">حقيقة سريعة</p>
             </button>
           </div>
         </div>
@@ -52,8 +52,8 @@
         <div class="space-y-6 max-w-4xl mx-auto w-full">
           @for (message of messages(); track $index) {
             <div class="flex items-start gap-4" [class.flex-row-reverse]="message.role === 'user'">
-              <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" [class.bg-purple-600]="message.role === 'model'" [class.bg-pink-600]="message.role === 'user'">
-                {{ message.role === 'model' ? 'MZ' : 'You' }}
+              <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0" [class.bg-purple-600]="message.role === 'model'" [class.bg-pink-600]="message.role === 'user'">
+                {{ message.role === 'model' ? 'MZ' : 'أنت' }}
               </div>
               <div class="bg-[#1E1C29] rounded-lg p-4 text-gray-300 max-w-2xl prose prose-invert prose-p:my-2" [innerHTML]="message.content"></div>
             </div>
@@ -72,10 +72,10 @@
             (input)="chatInput.set(chatInputElem.value)"
             (keydown)="submitOnEnter($event)"
             rows="1"
-            placeholder="Ask MZ anything..."
-            class="w-full bg-transparent p-4 pr-28 text-gray-200 placeholder-gray-500 focus:outline-none resize-none">
+            placeholder="اسأل MZ أي شيء..."
+            class="w-full bg-transparent py-4 pl-28 pr-4 text-gray-200 placeholder-gray-500 focus:outline-none resize-none">
           </textarea>
-          <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
+          <div class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
             <button class="p-2 rounded-lg text-gray-400 hover:bg-gray-700 hover:text-white transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
             </button>

@@ -46,7 +46,7 @@ export class AppComponent {
       console.error('Error sending message:', error);
        this.messages.update(current => {
           const lastMessage = current[current.length - 1];
-          lastMessage.content = 'Sorry, I encountered an error. Please try again.';
+          lastMessage.content = 'عفواً، لقد واجهت خطأ. يرجى المحاولة مرة أخرى.';
           return [...current.slice(0, -1), lastMessage];
         });
     } finally {

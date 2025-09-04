@@ -9,6 +9,6 @@ import { CommonModule } from '@angular/common';
 })
 export class ChatSidebarComponent {
   previousChats = [
-    { id: 1, title: 'New chat' },
+    { id: 1, title: 'محادثة جديدة' },
   ];
 }
