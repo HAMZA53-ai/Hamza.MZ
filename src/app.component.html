@@ -1,0 +1,106 @@
+<div class="relative w-full h-screen text-gray-200 bg-[#0D0B14] flex overflow-hidden">
+  <app-constellation-background></app-constellation-background>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col h-screen relative">
+    <!-- Header -->
+    <header class="flex justify-between items-center p-4 border-b border-gray-800/50 absolute top-0 left-0 right-0 bg-[#0D0B14]/50 backdrop-blur-sm z-10">
+      <div class="flex items-center space-x-3">
+        <h1 class="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text">MZ Code</h1>
+      </div>
+      <button class="p-2 rounded-md hover:bg-gray-800/50 lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </header>
+
+    <!-- Chat Area -->
+    <div class="flex-1 overflow-y-auto p-4 pt-20 pb-32">
+      @if (messages().length === 0) {
+        <div class="flex flex-col items-center justify-center h-full text-center px-4">
+          <div class="relative mb-6">
+            <div class="absolute -inset-1.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-75"></div>
+            <div class="relative flex space-x-1 p-3 bg-gray-900 rounded-xl">
+              <div class="w-8 h-10 bg-pink-500 rounded-lg"></div>
+              <div class="w-8 h-10 bg-purple-500 rounded-lg self-end transform -translate-y-2"></div>
+            </div>
+          </div>
+          <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 text-transparent bg-clip-text mb-2">Welcome to MZ</h2>
+          <p class="text-gray-400 max-w-md">You can ask me anything or attach a photo to get started.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-10 w-full max-w-3xl">
+            <button (click)="selectSuggestion('Explain the concept of black holes in simple terms')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-left hover:bg-gray-800/70 transition-colors duration-200">
+              <p class="font-semibold text-gray-200">Explain black holes</p>
+              <p class="text-sm text-gray-500">in simple terms</p>
+            </button>
+            <button (click)="selectSuggestion('What is the best way to learn web programming?')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-left hover:bg-gray-800/70 transition-colors duration-200">
+              <p class="font-semibold text-gray-200">Learn web programming</p>
+              <p class="text-sm text-gray-500">best way to start</p>
+            </button>
+            <button (click)="selectSuggestion('Write a short story about a robot that discovers emotions')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-left hover:bg-gray-800/70 transition-colors duration-200">
+              <p class="font-semibold text-gray-200">A story about a robot</p>
+              <p class="text-sm text-gray-500">discovering emotions</p>
+            </button>
+            <button (click)="selectSuggestion('What is the capital of Australia?')" class="bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-lg p-4 text-left hover:bg-gray-800/70 transition-colors duration-200">
+              <p class="font-semibold text-gray-200">Capital of Australia?</p>
+              <p class="text-sm text-gray-500">a quick fact</p>
+            </button>
+          </div>
+        </div>
+      } @else {
+        <div class="space-y-6 max-w-4xl mx-auto w-full">
+          @for (message of messages(); track $index) {
+            <div class="flex items-start gap-4" [class.flex-row-reverse]="message.role === 'user'">
+              <div class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold" [class.bg-purple-600]="message.role === 'model'" [class.bg-pink-600]="message.role === 'user'">
+                {{ message.role === 'model' ? 'MZ' : 'You' }}
+              </div>
+              <div class="bg-[#1E1C29] rounded-lg p-4 text-gray-300 max-w-2xl prose prose-invert prose-p:my-2" [innerHTML]="message.content"></div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+    
+    <!-- Input Bar -->
+    <div class="absolute bottom-0 left-0 right-0 p-4 bg-transparent">
+      <div class="max-w-4xl mx-auto">
+        <div class="relative bg-[#1E1C29]/80 backdrop-blur-sm border border-gray-700/50 rounded-xl shadow-2xl shadow-black/30">
+          <textarea 
+            #chatInputElem
+            [value]="chatInput()"
+            (input)="chatInput.set(chatInputElem.value)"
+            (keydown)="submitOnEnter($event)"
+            rows="1"
+            placeholder="Ask MZ anything..."
+            class="w-full bg-transparent p-4 pr-28 text-gray-200 placeholder-gray-500 focus:outline-none resize-none">
+          </textarea>
+          <div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-2">
+            <button class="p-2 rounded-lg text-gray-400 hover:bg-gray-700 hover:text-white transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path></svg>
+            </button>
+            <button 
+              (click)="handleSendMessage(chatInput())" 
+              [disabled]="isLoading() || !chatInput()"
+              class="p-2 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 text-white disabled:opacity-50 hover:from-purple-700 hover:to-pink-700 transition-all">
+              @if (isLoading()) {
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              } @else {
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+              }
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  
+  <!-- Sidebar -->
+  <app-chat-sidebar></app-chat-sidebar>
+</div>
